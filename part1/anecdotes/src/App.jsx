@@ -8,12 +8,13 @@ const Button = (props) => {
 }
 
 const VoteCounter = ({ value }) => {
-    if (value < 1) {
-        return
+    console.log(value)
+    if (value < 1 || !value) {
+        return (<></>);
     } else {
         return (<div>
-            has {value}
-        </div>)
+            has {value} votes
+        </div>);
 
     }
 }
@@ -49,7 +50,7 @@ const App = () => {
     function getMostVotedIndex(votes) {
         const keys = Object.keys(votes)
         let max = 0
-        let maxIndex
+        let maxIndex = null
         for (let key in keys){
             if (votes[key] > max){
                 max = votes[key];
@@ -74,6 +75,7 @@ const App = () => {
 
             <h1>Anecdote with most votes</h1>
             <div>{anecdotes[getMostVotedIndex(votes)]}</div>
+            <VoteCounter value={votes[getMostVotedIndex(votes)]} />
 
 
         </>

@@ -37,7 +37,7 @@ const App = () => {
 
             <h3>Numbers</h3>
 
-            <Persons persons={persons} filterName={filterName}/>
+            <Persons persons={persons} filterName={filterName} setPersons={setPersons}/>
             
         </div>
     )

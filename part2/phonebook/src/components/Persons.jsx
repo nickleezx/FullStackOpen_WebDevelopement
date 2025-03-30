@@ -8,7 +8,8 @@ function Persons({ persons, filterName, setPersons }) {
         if (confirm(`Delete ${person.name}?`)) 
         PersonService.deletePerson(person.id)
             .then(response => {
-                setPersons(persons.filter(person => person.id !== response.id))
+                console.log("here", response.id);
+                setPersons(persons.filter(p => p.id !== person.id))
             })
             .catch(e => console.log(e.message));
     }

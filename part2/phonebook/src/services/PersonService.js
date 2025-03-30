@@ -10,7 +10,9 @@ const addNumber = (newContact) => {
 
 const deletePerson = (id) => {
     return axios.delete(`${baseUrl}/${id}`)
-            .then(response => response.data)
+            .then(response => {
+                return response.data
+            })
 }
 
 const updatePerson = (id, updatedPerson) => {

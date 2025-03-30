@@ -1,9 +1,14 @@
 import PersonService from '../services/PersonService'
 
-const Form = function({newName, newNumber, setNewName, setNewNumber, persons, setPersons}){
+const Form = function({newName, newNumber, setNewName, setNewNumber, persons, setPersons, statusMessage, setStatusMessage}){
     const handleNameChange = (e) => setNewName(e.target.value);
 
     const handleNumberChange = (e) => setNewNumber(e.target.value);
+
+    const handleStatus = function (messaage) {
+        setStatusMessage(message);
+        setTimeout(()=> setStatusMessage(null), 5000);
+    }
 
     const handleSubmit = function (e) {
         e.preventDefault();
@@ -27,8 +32,13 @@ const Form = function({newName, newNumber, setNewName, setNewNumber, persons, se
                         ));
                         setNewName('');
                         setNewNumber('');
+                        handleStatus(`Updated ${response.name}`);
                     })
-                    .catch(e => console.log(e.message));
+                    .catch(e => {
+                        setStatusMessage(`Information about ${newEntry.name} has already been removed from the server`);
+                        setPersons(persons.filter(p => p.id !== newEntry.id));
+                        setTimeout(() => setStatusMessage(null), 5000);
+                    });
             }
         } else {
             // If not found, add a new contact
@@ -37,6 +47,7 @@ const Form = function({newName, newNumber, setNewName, setNewNumber, persons, se
                     setPersons(persons.concat(response)); // Append the newly added contact
                     setNewName('');
                     setNewNumber('');
+                    handleStatus(`Added ${response.name}`);
                 })
                 .catch(e => console.log(e.message));
         }

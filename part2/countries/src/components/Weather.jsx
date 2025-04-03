@@ -7,7 +7,7 @@ const Weather = ({country}) => {
 
     useEffect(() => {
         WeatherService.getWeather(country.latlng).then(response => setWeatherInfo(response))
-    }, [])
+    })
 
     if (weatherInfo === null)
         return <p>loading...</p>

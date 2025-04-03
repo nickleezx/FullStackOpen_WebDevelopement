@@ -6,7 +6,13 @@ const Weather = ({country}) => {
     const [weatherInfo, setWeatherInfo] = useState(null)
 
     useEffect(() => {
-        WeatherService.getWeather(country.latlng).then(response => setWeatherInfo(response))
+        const timer = setTimeout(() => {
+            WeatherService.getWeather(country.latlng).then(response => setWeatherInfo(response));
+        }, 3000)
+
+        return () => {
+            clearTimeout(timer);
+        }
     })
 
     if (weatherInfo === null)

@@ -7,14 +7,20 @@ const Weather = ({country}) => {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            WeatherService.getWeather(country.latlng).then(response => setWeatherInfo(response));
+            WeatherService.getWeather(country.latlng)
+                    .then(response => setWeatherInfo(response))
+                    .catch(e => console.log(e.response.data));
             console.log("effect ran");
         }, 3000)
 
         return () => {
             clearTimeout(timer);
         }
-    }, [])
+    }, [lat,lng])
+
+    useEffect(() => {
+        setWeatherInfo(null)
+    }, [country])
 
     if (weatherInfo === null)
         return <p>loading...</p>

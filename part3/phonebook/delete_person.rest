@@ -1,4 +1,4 @@
-DELETE http://localhost:3001/api/persons/2
+DELETE https://fullstackopen-phonebook-i2xi.onrender.com/api/persons/851
 
 ###
-GET http://localhost:3001/api/persons
+GET https://fullstackopen-phonebook-i2xi.onrender.com/api/persons

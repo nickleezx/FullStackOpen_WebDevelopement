@@ -20,4 +20,5 @@ Link to repository: https://github.com/nickleezx/FullStackOpen_phonebook
     - setting environment variables in backend
     - use of render.com service to deploy
     
+- setting up eslint and its config
 

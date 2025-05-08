@@ -1,0 +1,7 @@
+### Part 4 of FullStackOpen course
+
+My solutions for ex 4.1 - 4.23
+
+### Key takeaways
+
+ - Setting up of project structure

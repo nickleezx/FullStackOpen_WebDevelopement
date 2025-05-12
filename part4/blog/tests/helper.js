@@ -1,4 +1,4 @@
-const Blog = require('../models/blog')
+const Blog = require("../models/blog");
 
 const listWithOneBlog = [
   {
@@ -62,13 +62,38 @@ const initialBlogs = [
   },
 ];
 
+const blogWithoutLikes = {
+  _id: "6821c521cefbdd3627a84b8b",
+  title: "Blog without likes",
+  author: "Nick Lee",
+  url: "https://nolikes.com",
+  __v: 0,
+};
+
+const blogWithoutTitle = {
+  _id: "6821c521cefbdd3627a84b8b",
+  author: "Nick Lee",
+  url: "https://nolikes.com",
+  __v: 0,
+};
+
+const blogWithoutUrl = {
+  _id: "6821c521cefbdd3627a84b8b",
+  title: "Blog without likes",
+  author: "Nick Lee",
+  __v: 0,
+};
+
 const blogsInDb = async () => {
-  const blogs = await Blog.find({})
-  return blogs.map(blog => blog.toJSON())
-}
+  const blogs = await Blog.find({});
+  return blogs.map((blog) => blog.toJSON());
+};
 
 module.exports = {
-    listWithOneBlog,
-    initialBlogs,
-    blogsInDb
-}
+  listWithOneBlog,
+  initialBlogs,
+  blogsInDb,
+  blogWithoutLikes,
+  blogWithoutTitle,
+  blogWithoutUrl,
+};

@@ -1,1 +1,17 @@
 GET http://localhost:3001/api/blogs
+
+###
+GET http://localhost:3001/api/blogs/5a422bc61b54a676234d17fc
+
+###
+DELETE http://localhost:3001/api/blogs/5a422bc61b54a676234d17fc
+
+###
+PUT http://localhost:3001/api/blogs/5a422ba71b54a676234d17fb
+Content-Type: application/json
+
+{
+  "title": "New update",
+  "author": "Faith",
+  "url": "https://newupdate.com"
+}

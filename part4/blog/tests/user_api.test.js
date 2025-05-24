@@ -1,4 +1,4 @@
-const {describe, test, beforeEach, after} = require('node:test')
+const {describe, test, beforeEach, after, afterEach} = require('node:test')
 const assert = require('node:assert')
 const supertest = require('supertest')
 const app = require('../app')
@@ -11,14 +11,9 @@ const api = supertest(app)
 describe('Creating users', () => {
   beforeEach(async () => {
     await User.deleteMany({})
-
-    const user = new User({
-      username: "root",
-      name: "superuser",
-      password: "test_password"
-    })
-
-    await user.save()
+    await api.post('/api/users')
+    .send({username: "root", password: "test_password"})
+    .expect(201)
   })
 
   test('adding a valid user', async () => {
@@ -81,7 +76,35 @@ describe('Creating users', () => {
 
     assert.strictEqual(usersAtEnd.length, usersAtStart.length)
   })
+
+  test('adding user with existing username fails', async () => {
+    const userAtStart = await helper.usersInDb()
+    
+    const user = {
+      username: "root",
+      name: "some_new_user",
+      password: "new_test_password"
+    }
+    
+    await api
+    .post('/api/users')
+    .send(user)
+    .expect(400)
+    .expect('Content-Type', /application\/json/)
+    
+    const usersAtEnd = await helper.usersInDb()
+    
+    assert.strictEqual(userAtStart.length, usersAtEnd.length)
+  })
 })
+
+// afterEach(async () => {
+//   await User.deleteMany({})
+//   await api.post('/api/users')
+//   .send({username: "root", password: "test_password"})
+//   .expect(201)
+
+// })
 
 after(async () => {
   await mongoose.connection.close()

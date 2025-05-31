@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import loginService from '../services/login-service'
 import blogService from '../services/blogs'
 import Blog from './Blog'
+import LoginForm from './LoginForm'
+import Togglable from "./Togglable";
+import BlogForm from "./BlogForm";
 
-export default function LoginForm() {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+export default function MainPage() {
+  
   const [error, setError] = useState(null)
   const [user, setUser] = useState(null)
   const [blogs, setBlogs] = useState([])
-  const [newBlog, setNewBlog] = useState({title: '', author: '', url: ''})
+  const blogFormRef = useRef()
+  
 
   const showErrorMessage = () => {
     setError('Unable to login')
@@ -25,11 +28,10 @@ export default function LoginForm() {
   }, [])
 
   useEffect(() => {
-    blogService.getAll().then(response => setBlogs(response))
+    blogService.getAll().then(response => setBlogs(response.sort((a, b) => b.likes - a.likes)))
   }, [user])
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const login = async (username, password) => {
     const response = await loginService.login({username, password})
     if (response === null)
       showErrorMessage()
@@ -39,8 +41,6 @@ export default function LoginForm() {
       window.localStorage.setItem('loggedBlogAppUser', JSON.stringify(response))
       blogService.setToken(response.token)
     }
-    setUsername('')
-    setPassword('')
   }
 
   const handleLogout = () => {
@@ -49,16 +49,31 @@ export default function LoginForm() {
     blogService.setToken(null)
   }
 
-  const handleNewNote = async () => {
+  const createBlog = async (newBlog) => {
     const response = await blogService.createNewNote(newBlog)
+
     if (!response){
       setError('Failed to add blog')
       return setTimeout(() => setError(''), 2000)
     }
     setError(`Added a new blog: ${response.title} by ${response.author}`)
     setTimeout(() => setError(''), 2000)
-    setBlogs(blogs.concat(response))
-    setNewBlog({title: '', author: '', url: ''})
+    setBlogs(blogs.concat(response).sort((a, b) => b.likes - a.likes))
+  }
+
+  const updateLikes = async (updatedBlog) => {
+    const result = await blogService.updateBlog(updatedBlog)
+    setBlogs(blogs.map(blog => blog.id === result.id ? result : blog).sort((a, b) => b.likes - a.likes))
+  }
+
+  const deleteBlog = async (blogId) => {
+    const status = await blogService.deleteBlog(blogId)
+    if (status === 404 || status === 403){
+      setError('Unable to delete blog')
+      setTimeout(() => setError(''), 2000)
+    } else {
+      setBlogs(blogs.filter(blog => blog.id !== blogId).sort((a,b) => b.likes - a.likes))
+    }
   }
 
   if (user === null) {
@@ -66,29 +81,10 @@ export default function LoginForm() {
       <div >
       <h1>Log in to application</h1>
       {error === null ?  null : <h2 style={{border: '2px solid red', backgroundColor: 'grey', color:'red'}}>{error}</h2>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username: </label>
-          <input
-            type="text"
-            placeholder="Enter username"
-            name="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            />
-        </div>
-        <div>
-          <label htmlFor="password">Password: </label>
-          <input
-            type="password"
-            placeholder="Enter password"
-            value={password}
-            name="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">login</button>
-      </form>
+      <LoginForm
+        login={login}
+      />
+      
     </div>
     )
   }
@@ -105,22 +101,21 @@ export default function LoginForm() {
       <p style={{display: 'inline-block'}}>{user.username} logged in</p>
       <button onClick={handleLogout}>Log out</button>
 
-      <h2>Create new</h2>
-      <div>
-        <label htmlFor="title">Title</label>
-        <input type="text" name="title" value={newBlog.title} onChange={(e) => setNewBlog({...newBlog, title: e.target.value})}/>
-      </div>
-      <div>
-        <label htmlFor="author">Author</label>
-        <input type="text" name="author" value={newBlog.author} onChange={(e) => setNewBlog({...newBlog, author: e.target.value})}/>
-      </div>
-      <div>
-        <label htmlFor="url">URL</label>
-        <input type="text" name="url" value={newBlog.url} onChange={(e) => setNewBlog({...newBlog, url: e.target.value})}/>
-      </div>
-      <button onClick={handleNewNote}>create</button>
+      <Togglable 
+        buttonLabel={'new blog'}
+        ref={blogFormRef}
+      >
+        <BlogForm createBlog={createBlog} blogFormRef={blogFormRef}/>
+
+      </Togglable>
+      
       {blogs.map(blog => 
-      <Blog key={blog.id} blog={blog}/>)}
+        <Blog key={blog.id} 
+          blog={blog}  
+          updateLikes={updateLikes} 
+          userId={user.id}
+          deleteBlog={deleteBlog}
+          />)}
     </div>
   )
 }

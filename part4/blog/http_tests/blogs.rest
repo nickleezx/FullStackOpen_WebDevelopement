@@ -1,19 +1,19 @@
 GET http://localhost:3001/api/blogs
 
 ###
-DELETE http://localhost:3001/api/blogs/68319b9d9baafc46cc3f969d
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjY4MzA2MTM1OTZmNWVlNzg3MjQ5NTc3YSIsImlhdCI6MTc0ODA4MTQ2NCwiZXhwIjoxNzQ4MDg1MDY0fQ.BGO7kUMeAKaaFZsVQn1x99Jq505ZBsaH1rrw6oqWxSA
+DELETE http://localhost:3001/api/blogs/683b23fce6b3b10b822693d8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjY4MzM0MWY0ODc1NTIxMDM4MzYwYWZkOSIsImlhdCI6MTc0ODcwNTg0MywiZXhwIjoxNzQ4NzA5NDQzfQ.XLVUKT9UgSMRdVJAdeFDrVqGNfAbtd52HXbCtSjmvMY
 
 ###
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjY4MzFhYTJiYzA0YWVlMTI1ZjY4YzhkZSIsImlhdCI6MTc0ODA4NjIyNywiZXhwIjoxNzQ4MDg5ODI3fQ.PmuO1as7y8n6HYmtBfgsnMHczbKTYJwMyRGotTDWRes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjY4MzM0MWY0ODc1NTIxMDM4MzYwYWZkOSIsImlhdCI6MTc0ODcwNTg0MywiZXhwIjoxNzQ4NzA5NDQzfQ.XLVUKT9UgSMRdVJAdeFDrVqGNfAbtd52HXbCtSjmvMY
 
 {
-    "title": "How to develop a website",
-    "author": "Nick Lee",
+    "title": "rest delete",
+    "author": "root",
     "url": "https://nowhere.com",
-    "likes": 12
+    "likes": 1
 }
 
 ###

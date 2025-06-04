@@ -6,7 +6,7 @@ export default function BlogForm({createBlog, blogFormRef}) {
   const handleNewNote = async() => {
     await createBlog(newBlog)
     setNewBlog({title: '', author: '', url: ''})
-    blogFormRef.current.toggleVisibility()
+    
   }
 
   return (

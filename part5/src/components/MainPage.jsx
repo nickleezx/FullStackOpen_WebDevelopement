@@ -59,6 +59,7 @@ export default function MainPage() {
     setError(`Added a new blog: ${response.title} by ${response.author}`)
     setTimeout(() => setError(''), 2000)
     setBlogs(blogs.concat(response).sort((a, b) => b.likes - a.likes))
+    blogFormRef.current.toggleVisibility()
   }
 
   const updateLikes = async (updatedBlog) => {

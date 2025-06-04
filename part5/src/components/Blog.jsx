@@ -24,9 +24,9 @@ export default function Blog({blog, updateLikes, userId, deleteBlog}) {
   }
 
   return (
-    <div style={blogStyle}>
+    <div style={blogStyle} className="blog">
       <div>
-        <p style={{display:'inline'}}>{blog.title}</p>
+        <p style={{display:'inline'}}>{blog.title} {blog.author}</p>
         <button onClick={() => setVisible(!visible)}>{visible ? 'hide' : 'view'}</button>
       </div>
       <div style={showWhenVisible}>

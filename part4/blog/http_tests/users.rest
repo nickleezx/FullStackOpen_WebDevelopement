@@ -5,7 +5,10 @@ POST http://localhost:3001/api/users
 Content-Type: application/json
 
 {
-  "username": "nickleezx",
-  "name": "nick lee",
+  "username": "testing user",
+  "name": "test_user",
   "password": "test_password"
 }
+
+###
+POST http://localhost:3001/api/testing/reset

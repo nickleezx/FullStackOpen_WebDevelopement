@@ -31,10 +31,10 @@ export default function Blog({blog, updateLikes, userId, deleteBlog}) {
       </div>
       <div style={showWhenVisible}>
         <p>{blog.url}</p>
-        <p style={{display:'inline'}}>{blog.likes}</p>
+        <p style={{display:'inline'}} data-testid="likes">{blog.likes}</p>
         <button onClick={handleLike}>like</button>
         <p>{blog.author}</p>
-        <button style={{display: userId === blog.user.id ? "" : "none"}} onClick={handleDelete}>Remove</button>
+        <button style={{display: userId === blog.user?.id ? "" : "none"}} onClick={handleDelete}>Remove</button>
       </div>
     </div>
   )

@@ -17,9 +17,9 @@ const asObject = (anecdote) => {
   }
 }
 
-const initialState = anecdotesAtStart.map(asObject)
+const anecdotes = anecdotesAtStart.map(asObject)
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = anecdotes, action) => {
   console.log('state now: ', state)
   console.log('action', action)
 
@@ -34,9 +34,9 @@ const reducer = (state = initialState, action) => {
       return state.concat(action.payload)
     }
     default:
+      return state
   }
 
-  return state
 }
 
 export const addOneVote = (id) => {

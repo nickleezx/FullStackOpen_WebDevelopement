@@ -1,0 +1,8 @@
+PUT http://localhost:3001/anecdotes/21149
+Content-Type: application/json
+
+{
+    "content": "Adding manpower to a late software project makes it later!",
+    "id": "21149",
+    "votes": 1
+}

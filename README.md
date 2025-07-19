@@ -10,4 +10,5 @@ Progress:
 4) Part 3: Programming a server with Nodejs and Express ✅
 5) Part 4: Testing Express servers, user administration ✅
 6) Part 5: Testing React apps ✅
-7) Part 6: Advanced state management (in progress)
+7) Part 6: Advanced state management ✅
+8) Part 7: React router, custom hooks, styling app with CSS and webpack (In progress)

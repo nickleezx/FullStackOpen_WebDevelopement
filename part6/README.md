@@ -14,4 +14,7 @@
     - handling async events with redux thunk by using callback functions
 
 - React Query / Tanstack query
-    - 
+    - how to use queryClient, mutationfn
+
+- useReducer
+    - alternative to redux

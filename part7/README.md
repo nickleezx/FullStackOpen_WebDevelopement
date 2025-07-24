@@ -4,3 +4,7 @@
     - Router & Routes
     - Links
     - useNavigate hook
+
+- Creating custom hooks
+    - spreading attributes for controlled inputs
+  

@@ -7,4 +7,13 @@
 
 - Creating custom hooks
     - spreading attributes for controlled inputs
+
+- Using external UI libraries
+    - MaterialUI
+    - Boostrap
+
+- Webpack configuration
+    - setting up build configuration
+    - setting up developmental testing
+    - minifying built files
   

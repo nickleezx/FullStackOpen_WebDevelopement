@@ -4,4 +4,4 @@
 *.DS_Store
 **/.env.local
 **/.env
-follow_along/
+**/follow_along/

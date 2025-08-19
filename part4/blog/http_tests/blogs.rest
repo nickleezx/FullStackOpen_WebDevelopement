@@ -25,3 +25,11 @@ Content-Type: application/json
   "author": "Faith",
   "url": "https://newupdate.com"
 }
+
+###
+POST http://localhost:3001/api/blogs/5a422aa71b54a676234d17f8/comments
+Content-Type: application/json
+
+{
+    "comments": "new comment"
+}

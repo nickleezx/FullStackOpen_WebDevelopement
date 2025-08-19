@@ -11,4 +11,4 @@ Progress:
 5) Part 4: Testing Express servers, user administration ✅
 6) Part 5: Testing React apps ✅
 7) Part 6: Advanced state management ✅
-8) Part 7: React router, custom hooks, styling app with CSS and webpack (In progress)
+8) Part 7: React router, custom hooks, styling app with CSS and webpack ✅

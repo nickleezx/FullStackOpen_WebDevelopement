@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react'
-import Blog from './components/Blog'
-import blogService from './services/blogs'
+import { BrowserRouter as Router } from 'react-router-dom'
 import MainPage from './components/MainPage'
 
 export default function App() {
@@ -13,6 +11,7 @@ export default function App() {
   // }, [])
 
   return (
+    
     <MainPage />
     // <div>
     //   <h2>blogs</h2>

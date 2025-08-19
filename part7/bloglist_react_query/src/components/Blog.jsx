@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 
 export default function Blog({blog, updateLikes, userId, deleteBlog}) {
 
@@ -25,17 +26,17 @@ export default function Blog({blog, updateLikes, userId, deleteBlog}) {
 
   return (
     <div style={blogStyle} className="blog">
-      <div>
+      <Link to={`/blogs/${blog.id}`}>
         <p style={{display:'inline'}}>{blog.title} {blog.author}</p>
-        <button onClick={() => setVisible(!visible)}>{visible ? 'hide' : 'view'}</button>
-      </div>
-      <div style={showWhenVisible}>
+        {/* <button onClick={() => setVisible(!visible)}>{visible ? 'hide' : 'view'}</button> */}
+      </Link>
+      {/* <div style={showWhenVisible}>
         <p>{blog.url}</p>
         <p style={{display:'inline'}} data-testid="likes">{blog.likes}</p>
         <button onClick={handleLike}>like</button>
         <p>{blog.author}</p>
         <button style={{display: userId === blog.user?.id ? "" : "none"}} onClick={handleDelete}>Remove</button>
-      </div>
+      </div> */}
     </div>
   )
 }

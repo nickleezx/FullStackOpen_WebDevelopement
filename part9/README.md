@@ -7,4 +7,11 @@
 
 - Creating an Express application with typescript
     - @types/<package>
+
+- Express ts
+    - Validating user inputs with validating function using type guards
+        - e.g. parseString(): text is string, isString
+    - typescript enums
+    
+    *Note: The bulk for this lesson is in **utils.ts** of patientor_backend*
     

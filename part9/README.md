@@ -14,4 +14,7 @@
     - typescript enums
     
     *Note: The bulk for this lesson is in **utils.ts** of patientor_backend*
-    
+  
+- Zod
+    - Creating schemas with zod
+    - Using zod type parsing

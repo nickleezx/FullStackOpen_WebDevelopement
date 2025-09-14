@@ -1,12 +1,10 @@
-interface ContentProps {
-    name: string,
-    exerciseCount: number
-}
+import type { CoursePart } from "../types/CourseTypes"
+import Part from "./Part"
 
-export default function Content({ contentProps }: { contentProps: ContentProps[] }) {
+export default function Content({ contentProps }: { contentProps: CoursePart[] }) {
     return (
         <>
-            {contentProps.map(p => <p>{p.name} {p.exerciseCount}</p>)}
+            <Part courseParts={contentProps}/>
         </>
     )
 }

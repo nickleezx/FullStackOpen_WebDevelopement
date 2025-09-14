@@ -4,6 +4,6 @@ interface TotalProps {
 
 export default function Total({ total }: TotalProps) {
     return (
-        <p>Number of exercises{total}</p>
+        <p>Number of exercises {total}</p>
     )
 }

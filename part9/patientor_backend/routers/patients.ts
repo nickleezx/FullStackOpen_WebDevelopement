@@ -31,6 +31,11 @@ router.get("/", (_req, res) => {
     res.send(PatientService.getPatientsWithoutSsn());
 });
 
+router.get("/:id", (req, res) => {
+    const id = z.string().parse(req.params.id);
+    return res.send(PatientService.getPatientById(id));
+})
+
 router.post("/", newPatientParser, (req, res) => {
     try {
         const newPatient = NewPatientSchema.parse(req.body);

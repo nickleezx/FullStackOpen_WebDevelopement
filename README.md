@@ -12,3 +12,5 @@ Progress:
 6) Part 5: Testing React apps ✅
 7) Part 6: Advanced state management ✅
 8) Part 7: React router, custom hooks, styling app with CSS and webpack ✅
+9) Part 8: GraphQL 
+10) Part 9: Typescript ✅

@@ -1,4 +1,4 @@
-import { NewPatient, Gender } from "../types";
+import { NewPatient, Gender, Diagnosis } from "../types";
 import { z } from "zod";
 
 // const isString = (text: unknown): text is string => {
@@ -91,6 +91,15 @@ export const NewPatientSchema = z.object({
     gender: z.enum(Gender),
     occupation: z.string(),
 });
+
+export const parseDiagnosisCodes = (object: unknown): Array<Diagnosis['code']> => {
+    if (!object || typeof object !== 'object' || !('diagnosisCodees' in object)) {
+        return [] as Array<Diagnosis['code']>
+    }
+    return object.diagnosisCodees as Array<Diagnosis['code']>
+}
+
+
 
 export const toNewPatient = (object: unknown): NewPatient => {
     return NewPatientSchema.parse(object);

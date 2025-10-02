@@ -4,6 +4,7 @@
     - ts.config
     - typing of variables
     - typing of express
+    - omits with unions
 
 - Creating an Express application with typescript
     - @types/<package>

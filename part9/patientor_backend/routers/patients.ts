@@ -1,7 +1,8 @@
 import express, { NextFunction, Request, Response } from "express";
 import PatientService from "../services/patientService";
 import { NewPatientSchema } from "../utils/utils";
-import { z } from "zod";
+import { z, ZodError } from "zod";
+import { NewBaseEntrySchema, NewEntrySchema } from "../types";
 
 const router = express.Router();
 
@@ -13,6 +14,15 @@ const newPatientParser = (req: Request, _res: Response, next: NextFunction) => {
         next(error);
     }
 };
+
+const newEntryParser = (req: Request, _res: Response, next: NextFunction) => {
+    try {
+        NewBaseEntrySchema.parse(req.body)
+        next()
+    } catch (error: unknown) {
+        next(error)
+    }
+}
 
 const errorHandler = (
     error: unknown,
@@ -28,7 +38,7 @@ const errorHandler = (
 };
 
 router.get("/", (_req, res) => {
-    res.send(PatientService.getPatientsWithoutSsn());
+    res.send(PatientService.getPatients());
 });
 
 router.get("/:id", (req, res) => {
@@ -51,6 +61,24 @@ router.post("/", newPatientParser, (req, res) => {
         res.status(500).send(errorMessage);
     }
 });
+
+router.post("/:id/entries", newEntryParser, (req, res) => {
+    try {
+        const newEntry = NewEntrySchema.parse(req.body);
+        const patient = PatientService.addEntryToPatient(req.params.id, newEntry)
+        return res.json(patient);
+    } catch (error: unknown) {
+        let errorMsg = "Something went wrong.";
+        if (error instanceof ZodError) {
+            const flattedError = z.treeifyError(error)
+            console.log("Validation failed. Error: ", flattedError)
+            errorMsg = "Error" + JSON.stringify(flattedError);
+        } else {
+            console.log(error)
+        }
+        return res.status(500).send(errorMsg);
+    }
+})
 
 router.use(errorHandler);
 

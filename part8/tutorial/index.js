@@ -39,7 +39,7 @@ const typeDefs = `
 
     type Person {
         name: String!
-        phone: String!
+        phone: String
         address: Address!
         id: ID!
     }
@@ -109,7 +109,7 @@ const resolvers = {
             persons = persons.map(p => p.name === args.name ? newP : p)
             return newP
 
-        }
+        },
     }
 };
 
